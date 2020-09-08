@@ -36,44 +36,43 @@ class Course(models.Model):
 
 
 class Module(models.Model):
-    course          =   models.ForeignKey(Course, related_name='modules', on_delete=models.CASCADE)
-    order           =   OrderField(blank=True, for_fields=['course'])
-    title           =   models.CharField(max_length=200)
-    description     =   models.TextField(blank=True)
-    
-    def __str__(self):
-        return f'{self.order}. {self.title}'   
+    course      =   models.ForeignKey(Course, related_name='modules', on_delete=models.CASCADE)
+    title       =   models.CharField(max_length=200)
+    description =   models.TextField(blank=True)
+    order       =   OrderField(blank=True, for_fields=['course'])
 
     class Meta:
-        ordering = ['order']
+            ordering = ['order']
+
+    def __str__(self):
+        return '{}. {}'.format(self.order, self.title)
 
 
 
 class Content(models.Model):
-    module          =   models.ForeignKey(Module, related_name='contents', 
-                                                  on_delete=models.CASCADE, 
-                                                  limit_choices_to={'model__in':('text', 'video', 'image', 'file')})
-    order           =   OrderField(blank=True, for_fields=['module'])
-    content_type    =   models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    module          =   models.ForeignKey(Module, related_name='contents', on_delete=models.CASCADE)
+    content_type    =   models.ForeignKey(ContentType, limit_choices_to={'model__in':('text', 'video', 'image', 'file')}, on_delete=models.CASCADE)
     object_id       =   models.PositiveIntegerField()
     item            =   GenericForeignKey('content_type', 'object_id')
+    order           =   OrderField(blank=True, for_fields=['module'])
 
     class Meta:
-        ordering = ['order']
+            ordering = ['order']
 
 
 
 class ItemBase(models.Model):
-    owner       =   models.ForeignKey(User, related_name='%(class)s_related', on_delete=models.CASCADE) 
+    owner       =   models.ForeignKey(User, related_name='%(class)s_related', on_delete=models.CASCADE)
     title       =   models.CharField(max_length=250)
-    created     =   models.DateTimeField(auto_now_add=False)
-    updated     =   models.DateTimeField(auto_now=False)
+    created     =   models.DateTimeField(auto_now_add=True)
+    updated     =   models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
 
     def __str__(self):
         return self.title
+
 
 
 class Text(ItemBase):
@@ -85,7 +84,7 @@ class File(ItemBase):
 
 
 class Image(ItemBase):
-    file = models.FileField(upload_to='images')
+       file = models.FileField(upload_to='images')
 
 
 class Video(ItemBase):
