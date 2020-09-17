@@ -1,2 +1,2 @@
-# educacction
+# educaction
 E-Learnin platform 
