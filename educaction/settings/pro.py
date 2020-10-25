@@ -1,7 +1,6 @@
 from .base import *
 
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -14,10 +13,10 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'educa',
-       'USER': 'educa',
-       'PASSWORD': '222',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'educa',
+        'USER': 'educa',
+        'PASSWORD': '222',
+    }
 }
