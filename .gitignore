@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 media/
+setup.cfg
 images/
 build/
 develop-eggs/
