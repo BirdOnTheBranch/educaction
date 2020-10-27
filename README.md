@@ -3,7 +3,7 @@
 # educaction
  
 
-*E-learnin online platform to learn taking a courses or instead be a teacher and create them. You can share lessons on files, pictures y videos.*
+*E-learnin online platform to learn taking a courses or instead be a teacher and create them. You can share lessons on files, pictures and videos.*
 
 &nbsp;
 ###### Hi, human. The repo uses:
